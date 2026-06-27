@@ -15,10 +15,6 @@ export default function Home() {
       <div className="absolute top-8 left-8 z-10">
         <SiteNav overlay vertical />
       </div>
-      <div className="absolute right-[-10%] bottom-[5%] z-10 w-[40%]" style={{ transform: "rotate(230deg)" }}>
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/nokia.jpg" alt="" className="w-full h-auto" />
-      </div>
       <div className="relative z-10 flex w-[60%] flex-col items-center gap-6 pt-0 self-start mt-0">
         <div className="relative w-full">
           <Image src={logoImage} alt="" className="w-full h-auto" priority />
