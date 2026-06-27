@@ -1,10 +1,16 @@
 "use client";
 
-import { FormEvent, useState } from "react";
+import { FormEvent, ReactNode, useState } from "react";
 
 type Status = "idle" | "loading" | "success" | "error";
 
-export function MailingListSignup({ overlay = false }: { overlay?: boolean }) {
+export function MailingListSignup({
+  overlay = false,
+  middle,
+}: {
+  overlay?: boolean;
+  middle?: ReactNode;
+}) {
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<Status>("idle");
   const [message, setMessage] = useState("");
@@ -45,11 +51,11 @@ export function MailingListSignup({ overlay = false }: { overlay?: boolean }) {
     : "text-xs uppercase tracking-[0.3em] text-foreground/50";
 
   const inputClass = overlay
-    ? "min-w-0 flex-1 rounded-full border border-white/30 bg-black/30 px-4 py-2.5 text-sm text-white placeholder:text-white/50 backdrop-blur-sm outline-none transition focus:border-white/60 disabled:opacity-60"
+    ? "min-w-0 flex-1 bg-transparent border-none px-2 py-2.5 text-sm text-white placeholder:text-white/50 outline-none disabled:opacity-60 mt-12"
     : "min-w-0 flex-1 rounded-full border border-foreground/20 bg-transparent px-4 py-2.5 text-sm text-foreground placeholder:text-foreground/40 outline-none transition focus:border-foreground/50 disabled:opacity-60";
 
   const buttonClass = overlay
-    ? "rounded-full border border-white/30 bg-white/10 px-5 py-2.5 text-sm uppercase tracking-widest text-white backdrop-blur-sm transition hover:bg-white/20 disabled:cursor-not-allowed disabled:opacity-60"
+    ? "bg-transparent border-none px-2 py-2.5 text-sm uppercase tracking-widest text-white/80 transition hover:text-white disabled:cursor-not-allowed disabled:opacity-60"
     : "rounded-full border border-foreground/20 bg-foreground/5 px-5 py-2.5 text-sm uppercase tracking-widest text-foreground transition hover:bg-foreground/10 disabled:cursor-not-allowed disabled:opacity-60";
 
   const messageClass = `text-sm ${
@@ -61,28 +67,26 @@ export function MailingListSignup({ overlay = false }: { overlay?: boolean }) {
   return (
     <form
       onSubmit={handleSubmit}
-      className="flex w-full max-w-md flex-col items-center gap-3"
+      className="flex w-full flex-col items-center gap-3"
     >
-      <p className={labelClass}>Sign up for updates</p>
-      <div className="flex w-full flex-col gap-2 sm:flex-row">
-        <input
-          type="email"
-          name="email"
-          value={email}
-          onChange={(event) => setEmail(event.target.value)}
-          placeholder="your@email.com"
-          required
-          disabled={status === "loading"}
-          className={inputClass}
-        />
-        <button
-          type="submit"
-          disabled={status === "loading"}
-          className={buttonClass}
-        >
-          {status === "loading" ? "Signing up…" : "Sign up"}
-        </button>
-      </div>
+      <input
+        type="email"
+        name="email"
+        value={email}
+        onChange={(event) => setEmail(event.target.value)}
+        placeholder="your@email.com"
+        required
+        disabled={status === "loading"}
+        className={inputClass}
+      />
+      {middle ?? null}
+      <button
+        type="submit"
+        disabled={status === "loading"}
+        className={buttonClass}
+      >
+        {status === "loading" ? "Signing up…" : "Join Mailing List"}
+      </button>
       {message ? (
         <p className={messageClass} role="status">
           {message}
