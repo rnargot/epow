@@ -11,7 +11,7 @@ export default function Home() {
       <div className="pointer-events-none absolute inset-0 bg-black/20" />
       <div className="relative z-10 flex flex-col items-center gap-10">
         <SiteNav overlay />
-        <MailingListSignup />
+        <MailingListSignup overlay />
       </div>
     </div>
   );
